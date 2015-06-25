@@ -1,0 +1,33 @@
+-- Synch vectors for the assembly of <Application_Queue,Application_Body, Comp1, Comp2, Comp3, Comp4, Scenario>
+-- with the following input specification:
+-- <Application_Queue,Application_Body, Comp1, Comp2, Comp3, Comp4, Scenario>
+gate par using
+
+"SERVE_RUNPETERSON" * "SERVE_RUNPETERSON" * _ * _ * _ * _ * _ -> "SERVE_RUNPETERSON",
+_ * "CALL_RUNPETERSON" * _ * _ * _ * "QUEUE_RUNPETERSON" * _ -> "CALL_RUNPETERSON",
+"SERVE_IAMTHELEADER" * _ * _ * _ * _ * _ * _ -> "Q_IAMTHELEADER",
+"SERVE_IAMNOTTHELEADER" * _ * _ * _ * _ * _ * _ -> "Q_IAMNOTTHELEADER",
+"Q_IAMTHELEADER" * _ * _ * _ * "Q_IAMTHELEADER" * _ * _ -> "COMP3_Q_IAMTHELEADER",
+"Q_IAMNOTTHELEADER" * _ * _ * _ * "Q_IAMNOTTHELEADER" * _ * _ -> "COMP3_Q_IAMNOTTHELEADER",
+"Q_IAMTHELEADER" * _ * "Q_IAMTHELEADER" * _ * _ * _ * _ -> "COMP1_Q_IAMTHELEADER",
+"Q_IAMNOTTHELEADER" * _ * "Q_IAMNOTTHELEADER" * _ * _ * _ * _ -> "COMP1_Q_IAMNOTTHELEADER",
+"Q_IAMTHELEADER" * _ * _ * "Q_IAMTHELEADER" * _ * _ * _ -> "COMP2_Q_IAMTHELEADER",
+"Q_IAMNOTTHELEADER" * _ * _ * "Q_IAMNOTTHELEADER" * _ * _ * _ -> "COMP2_Q_IAMNOTTHELEADER",
+"Q_IAMTHELEADER" * _ * _ * _ * _ * "Q_IAMTHELEADER" * _ -> "COMP4_Q_IAMTHELEADER",
+"Q_IAMNOTTHELEADER" * _ * _ * _ * _ * "Q_IAMNOTTHELEADER" * _ -> "COMP4_Q_IAMNOTTHELEADER",
+_ * _ * "QUEUE_MESSAGE" * _ * _ * "Q_MESSAGE" * _ -> "COMP4_COMP1_Q_MESSAGE",
+_ * _ * _ * _ * "Q_MESSAGE" * "QUEUE_MESSAGE" * _ -> "COMP3_COMP4_Q_MESSAGE",
+_ * _ * "Q_MESSAGE" * "QUEUE_MESSAGE" * _ * _ * _ -> "COMP1_COMP2_Q_MESSAGE",
+_ * _ * _ * "Q_MESSAGE" * "QUEUE_MESSAGE" * _ * _ -> "COMP2_COMP3_Q_MESSAGE",
+"Q_RUNPETERSON" * _ * _ * _ * _ * _ * "Q_RUNPETERSON" -> "SCENARIO_RUNPETERSON",
+_ * _ * _ * _ * _ * _ * "CALL_SCENARIO" -> "CALL_SCENARIO",
+_ * _ * _ * _ * "ERRORQUEUE" * _ * _ -> "COMP3_ERRORQUEUE",
+_ * _ * "ERRORQUEUE" * _ * _ * _ * _ -> "COMP1_ERRORQUEUE",
+_ * _ * _ * "ERRORQUEUE" * _ * _ * _ -> "COMP2_ERRORQUEUE",
+_ * _ * _ * _ * _ * "ERRORQUEUE" * _ -> "COMP4_ERRORQUEUE",
+"ERRORQUEUE" * _ * _ * _ * _ * _ * _ -> "APPLICATION_ERRORQUEUE" 
+
+
+in
+"Application_Queue" ||"Application_Body"||"Comp1"||"Comp2"||"Comp3"||"Comp4"||"Scenario"
+end par

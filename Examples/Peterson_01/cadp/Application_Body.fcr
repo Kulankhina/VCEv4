@@ -1,0 +1,19 @@
+const Max_Proxy:nat is 3
+type IntType is 0..0
+type BoolType is bool
+type NatType is nat
+process Application_Body
+[Serve_runPeterson: none,
+Call_runPeterson: none,
+R_runPeterson: none]
+is
+states s0,s2,s1
+
+from s0
+	Serve_runPeterson; to s1
+from s1
+	Call_runPeterson; to s2
+from s2
+	R_runPeterson; to s0
+
+Application_Body

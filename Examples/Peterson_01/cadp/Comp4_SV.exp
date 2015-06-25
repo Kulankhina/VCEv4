@@ -1,0 +1,31 @@
+-- Synch vectors for the assembly of <Comp4_Queue,Comp4_Body, Comp4_runPeterson(), Comp4_message(step, val), Comp4_isActive_ac(), Comp4_left_ac(), Comp4_cnum_ac(), Comp4_max_ac()>
+-- with the following input specification:
+-- <Comp4_Queue,Comp4_Body, Comp4_runPeterson(), Comp4_message(step, val), Comp4_isActive_ac(), Comp4_left_ac(), Comp4_cnum_ac(), Comp4_max_ac()>
+gate par using
+
+"Q_RUNPETERSON" * _ * _ * _ * _ * _ * _ * _ -> "QUEUE_RUNPETERSON",
+"SERVE_RUNPETERSON" * "SERVE_RUNPETERSON" * _ * _ * _ * _ * _ * _ -> "SERVE_RUNPETERSON",
+_ * "CALL_RUNPETERSON" * "CALL_RUNPETERSON" * _ * _ * _ * _ * _ -> "CALL_RUNPETERSON",
+_ * "R_RUNPETERSON" * "R_RUNPETERSON" * _ * _ * _ * _ * _ -> "R_RUNPETERSON",
+_ * _ * "Q_MESSAGE" * _ * _ * _ * _ * _ -> "Q_MESSAGE",
+_ * "R_MESSAGE" * _ * "R_MESSAGE" * _ * _ * _ * _ -> "R_MESSAGE",
+_ * _ * _ * "Q_IAMTHELEADER" * _ * _ * _ * _ -> "Q_IAMTHELEADER",
+_ * _ * _ * "Q_MESSAGE" * _ * _ * _ * _ -> "Q_MESSAGE",
+_ * _ * _ * "Q_IAMNOTTHELEADER" * _ * _ * _ * _ -> "Q_IAMNOTTHELEADER",
+_ * _ * _ * "CALL_GET_ISACTIVE" * "CALL_GET_ISACTIVE" * _ * _ * _ -> "CALL_GET_ISACTIVE",
+_ * _ * _ * "R_GET_ISACTIVE" * "R_GET_ISACTIVE" * _ * _ * _ -> "R_GET_ISACTIVE",
+_ * _ * _ * "CALL_SET_ISACTIVE" * "CALL_SET_ISACTIVE" * _ * _ * _ -> "CALL_SET_ISACTIVE",
+_ * _ * _ * "CALL_SET_LEFT" * _ * "CALL_SET_LEFT" * _ * _ -> "CALL_SET_LEFT",
+_ * _ * _ * "CALL_GET_LEFT" * _ * "CALL_GET_LEFT" * _ * _ -> "CALL_GET_LEFT",
+_ * _ * _ * "R_GET_LEFT" * _ * "R_GET_LEFT" * _ * _ -> "R_GET_LEFT",
+_ * _ * _ * "CALL_GET_CNUM" * _ * _ * "CALL_GET_CNUM" * _ -> "CALL_GET_CNUM",
+_ * _ * _ * "R_GET_CNUM" * _ * _ * "R_GET_CNUM" * _ -> "R_GET_CNUM",
+_ * _ * _ * "CALL_SET_MAX" * _ * _ * _ * "CALL_SET_MAX" -> "CALL_SET_MAX",
+_ * _ * _ * "CALL_GET_MAX" * _ * _ * _ * "CALL_GET_MAX" -> "CALL_GET_MAX",
+_ * _ * _ * "R_GET_MAX" * _ * _ * _ * "R_GET_MAX" -> "R_GET_MAX",
+"ERRORQUEUE" * _ * _ * _ * _ * _ * _ * _ -> "ERRORQUEUE" 
+
+
+in
+"Comp4_Queue" ||"Comp4_Body"||"Comp4_runPeterson"||"Comp4_message"||"Comp4_isActive_ac"||"Comp4_left_ac"||"Comp4_cnum_ac"||"Comp4_max_ac"
+end par

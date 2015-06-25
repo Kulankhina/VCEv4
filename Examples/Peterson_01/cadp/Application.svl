@@ -1,0 +1,10 @@
+"Application_Body_nr.bcg" = total rename
+"R_RUNPETERSON !POS (\([0-9]*\))\(.*\)" -> "R_RUNPETERSON_\1 \2"
+in "Application_Body.bcg";
+"Application_Body.bcg" = "Application_Body_nr.bcg";
+
+"Application_nh.bcg"=  branching reduction of "Application_SV.exp";
+
+"Application.bcg" = branching reduction of gate hide
+
+in "Application_nh.bcg"

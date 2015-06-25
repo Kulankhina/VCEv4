@@ -1,0 +1,26 @@
+-- Synch vectors for the assembly of <Comp3_Queue,Comp3_Body, Comp3_message(step, val), Comp3_isActive_ac(), Comp3_left_ac(), Comp3_cnum_ac(), Comp3_max_ac()>
+-- with the following input specification:
+-- <Comp3_Queue,Comp3_Body, Comp3_message(step, val), Comp3_isActive_ac(), Comp3_left_ac(), Comp3_cnum_ac(), Comp3_max_ac()>
+gate par using
+
+_ * "R_MESSAGE" * "R_MESSAGE" * _ * _ * _ * _ -> "R_MESSAGE",
+_ * _ * "Q_IAMTHELEADER" * _ * _ * _ * _ -> "Q_IAMTHELEADER",
+_ * _ * "Q_MESSAGE" * _ * _ * _ * _ -> "Q_MESSAGE",
+_ * _ * "Q_IAMNOTTHELEADER" * _ * _ * _ * _ -> "Q_IAMNOTTHELEADER",
+_ * _ * "CALL_GET_ISACTIVE" * "CALL_GET_ISACTIVE" * _ * _ * _ -> "CALL_GET_ISACTIVE",
+_ * _ * "R_GET_ISACTIVE" * "R_GET_ISACTIVE" * _ * _ * _ -> "R_GET_ISACTIVE",
+_ * _ * "CALL_SET_ISACTIVE" * "CALL_SET_ISACTIVE" * _ * _ * _ -> "CALL_SET_ISACTIVE",
+_ * _ * "CALL_SET_LEFT" * _ * "CALL_SET_LEFT" * _ * _ -> "CALL_SET_LEFT",
+_ * _ * "CALL_GET_LEFT" * _ * "CALL_GET_LEFT" * _ * _ -> "CALL_GET_LEFT",
+_ * _ * "R_GET_LEFT" * _ * "R_GET_LEFT" * _ * _ -> "R_GET_LEFT",
+_ * _ * "CALL_GET_CNUM" * _ * _ * "CALL_GET_CNUM" * _ -> "CALL_GET_CNUM",
+_ * _ * "R_GET_CNUM" * _ * _ * "R_GET_CNUM" * _ -> "R_GET_CNUM",
+_ * _ * "CALL_SET_MAX" * _ * _ * _ * "CALL_SET_MAX" -> "CALL_SET_MAX",
+_ * _ * "CALL_GET_MAX" * _ * _ * _ * "CALL_GET_MAX" -> "CALL_GET_MAX",
+_ * _ * "R_GET_MAX" * _ * _ * _ * "R_GET_MAX" -> "R_GET_MAX",
+"ERRORQUEUE" * _ * _ * _ * _ * _ * _ -> "ERRORQUEUE" 
+
+
+in
+"Comp3_Queue" ||"Comp3_Body"||"Comp3_message"||"Comp3_isActive_ac"||"Comp3_left_ac"||"Comp3_cnum_ac"||"Comp3_max_ac"
+end par
